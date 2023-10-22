@@ -2,10 +2,11 @@ import os
 import time
 import git
 
+# Update the path to the location where you've cloned your repositories
 repos = [
-    {'name': 'amiral108/monitoring-tool', 'path': 'path_to_your_local_clone_of_monitoring-tool'},
-    {'name': 'httpie/httpie', 'path': 'httpie'},
-    {'name': 'pallets/flask', 'path': 'flask'}
+    {'name': 'amirali108/monitoring-tool', 'path': 'C:/Users/User/monitoring-tool'},
+    {'name': 'httpie/httpie', 'path': 'C:/Users/User/httpie'},  # if you've cloned this repo locally
+    {'name': 'pallets/flask', 'path': 'C:/Users/User/flask'}   # if you've cloned this repo locally
 ]
 
 def get_latest_commit_message(repo_path):
@@ -27,14 +28,9 @@ def check_for_new_commits(repo):
     remote_commit = os.popen('git rev-parse @{u}').read().strip()
 
     if local_commit != remote_commit:
-        # Check if README.md was part of the latest commit
-        changed_files = os.popen('git diff --name-only HEAD @{u}').read().strip().split('\n')
-        if 'README.md' in changed_files:
-            print(f"New commit detected in {repo_name} for README.md!")
-            print(f"Latest commit message: {get_latest_commit_message(repo_path)}")
-            os.system('git pull')
-        else:
-            print(f"New commit detected in {repo_name}, but not in README.md!")
+        print(f"New commit detected in {repo_name}!")
+        print(f"Latest commit message: {get_latest_commit_message(repo_path)}")
+        os.system('git pull')
     else:
         print(f"Repo {repo_name} is up-to-date!")
 
